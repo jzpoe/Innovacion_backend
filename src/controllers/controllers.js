@@ -73,7 +73,7 @@ const novedades = {
       }
   
       // Convertir el ID a ObjectId
-      const objectId = mongoose.Types.ObjectId(id);
+      const objectId = new mongoose.Types.ObjectId(id);
   
       // Eliminar el documento por ID
       const eliminarNovedad = await novedadModel.findByIdAndDelete(objectId);
@@ -86,8 +86,8 @@ const novedades = {
       // Responder con éxito
       return res.status(200).json({ message: 'Elemento eliminado correctamente' });
     } catch (error) {
-      // Error del servidor
-      return res.status(500).json({ message: 'Error en el servidor', error });
+      console.error("Error en el servidor:", error);  // Registrar el error en la consola para depuración
+      return res.status(500).json({ message: 'Error en el servidor', error: error.message || error });
     }
   }
 };
