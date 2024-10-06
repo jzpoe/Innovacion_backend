@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import novedadModel from "../model/model.js";
 
 const novedades = {
@@ -59,6 +60,34 @@ const novedades = {
     } catch (error) {
       console.error('Error al filtrar novedades:', error);
       res.status(500).json({ error: 'Error al filtrar novedades' });
+    }
+  },
+
+  async deleteNovedad(req, res) {
+    const { id } = req.params;
+  
+    try {
+      // Verificar si el ID es válido
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Formato de ID inválido' });
+      }
+  
+      // Convertir el ID a ObjectId
+      const objectId = mongoose.Types.ObjectId(id);
+  
+      // Eliminar el documento por ID
+      const eliminarNovedad = await novedadModel.findByIdAndDelete(objectId);
+  
+      // Verificar si el documento existía
+      if (!eliminarNovedad) {
+        return res.status(404).json({ message: 'Elemento no encontrado' });
+      }
+  
+      // Responder con éxito
+      return res.status(200).json({ message: 'Elemento eliminado correctamente' });
+    } catch (error) {
+      // Error del servidor
+      return res.status(500).json({ message: 'Error en el servidor', error });
     }
   }
 };

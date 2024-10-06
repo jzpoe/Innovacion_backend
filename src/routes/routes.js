@@ -8,6 +8,7 @@ const router = express.Router()
 router.post('/', novedades.create)
 router.get('/', novedades.novedadeGet)
 router.get('/filtrar', novedades.filtradosGet)
+router.delete('/:delete', novedades.deleteNovedad)
 
 
 
