@@ -5,6 +5,7 @@ const novedades = {
   async create(req, res) {
     try {
       const createNovedad = new novedadModel({
+        nombre: req.body.nombre,
         compras: req.body.compras,
         provedores: req.body.provedores,
         empleado: req.body.empleado,

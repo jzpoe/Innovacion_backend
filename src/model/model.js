@@ -1,6 +1,10 @@
 import mongoose, { Types } from "mongoose";
 
 const novedadSchema = mongoose.Schema({
+    nombre:{
+        type: String,
+        require: true
+    },
     compras:{
         type: String,
         require: false
