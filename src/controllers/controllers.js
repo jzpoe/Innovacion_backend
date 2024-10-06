@@ -46,6 +46,7 @@ const novedades = {
       // Realiza la búsqueda en los campos especificados (usa una expresión regular para búsqueda flexible)
       const novedadesFiltradas = await novedadModel.find({
         $or: [
+          { nombre: { $regex: filterFront, $options: "i" } },
           { compras: { $regex: filterFront, $options: "i" } },
           { proveedores: { $regex: filterFront, $options: "i" } },
           { empleado: { $regex: filterFront, $options: "i" } },
