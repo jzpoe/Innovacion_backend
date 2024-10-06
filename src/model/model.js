@@ -3,7 +3,7 @@ import mongoose, { Types } from "mongoose";
 const novedadSchema = mongoose.Schema({
     nombre:{
         type: String,
-        require: true
+        require: false
     },
     compras:{
         type: String,
